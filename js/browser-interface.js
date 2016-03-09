@@ -1,17 +1,14 @@
-var simon = require('../js/simon.js');
+var Simon = require('../js/simon.js').Simon;
 
 $(document).ready(function(){
-  var sequence = [3,1,4];
-  var index = 0;
+  var game = new Simon();
 
   $("#start-button").click(function() {
-    simon.animate(sequence);
+    game.beginTurn();
+  });
 
-    $(".tile").off();
-    $(".tile").click(function() {
-      var clicked = parseInt($(this).attr('id'));
-      simon.check(clicked, sequence, index);
-      index++;
-    });
+  $(".tile").click(function() {
+    var clicked = parseInt($(this).attr('id'));
+    game.check(clicked);
   });
 });
