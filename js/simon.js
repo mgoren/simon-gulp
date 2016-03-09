@@ -5,50 +5,53 @@ var Simon = function() {
 Simon.prototype.resetGame = function() {
   this.sequence = [];
   this.turn = 0;
-  $("#turn").empty();
+  this.deactivateBoard();
 };
 
-Simon.prototype.beginTurn = function() {
-  this.turn++;
+Simon.prototype.nextTurn = function() {
+  this.sequence.push(Math.floor((Math.random()*4)+1));
   this.index = 0;
-  this.sequence.push(this.randomNumber());
   this.animate();
-  $("#turn").text(this.turn);
+  $("#turn").text(this.turn + 1);
+};
+
+Simon.prototype.check = function(clicked) {
+  if (clicked !== this.sequence[this.index]) {
+    alert("game over - score: " + this.turn);
+    this.resetGame();
+  } else if (this.index === this.sequence.length - 1) {
+    this.turn++;
+    this.nextTurn();
+  } else {
+    this.index++;
+  }
 };
 
 Simon.prototype.animate = function() {
-  var sequence = this.sequence;
+  var self = this;
   var i=0;
   var interval = setInterval(function() {
-    lightUp(sequence[i]);
+    self.lightUp(self.sequence[i]);
     i++;
-    if (i >= sequence.length) {
+    if (i >= self.sequence.length) {
       clearInterval(interval);
     }
   }, 600);
 };
 
-var lightUp = function(tile) {
+Simon.prototype.lightUp = function(tile) {
   $("#" + tile).addClass("lit");
   window.setTimeout(function() {
     $("#" + tile).removeClass('lit');
   }, 300);
 };
 
-Simon.prototype.check = function(clicked) {
-  if (clicked !== this.sequence[this.index]) {
-    alert("game over");
-    this.resetGame();
-  } else if (this.index === this.sequence.length - 1) {
-    this.beginTurn();
-  } else {
-    this.index++;
-    console.log("correct - index: " + this.index);
-  }
+Simon.prototype.deactivateBoard = function() {
+  $("#turn-display").hide();
+  $("#turn").empty();
+  $(".tile").removeClass("clickable");
+  $(".tile").off();
+  $("#start-button").show();
 };
-
-Simon.prototype.randomNumber = function() {
-  return Math.floor((Math.random()*4)+1);
-}
 
 exports.Simon = Simon;

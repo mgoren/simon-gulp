@@ -9,10 +9,17 @@ $green : #BEDE15;
   	height: 290px;
   	border-radius: 150px 150px 150px 150px;
   	position: absolute;
-    cursor: pointer;
     &:hover {
       border: 2px solid black
     }
+  }
+
+  .lit {
+    opacity: 1 !important;
+  }
+
+  .clickable {
+    cursor: pointer;
   }
 
   .red {
@@ -41,6 +48,8 @@ $green : #BEDE15;
 
 }
 
-.lit {
-  opacity: 1 !important;
+
+#turn-display {
+  display: none;
 }
+
