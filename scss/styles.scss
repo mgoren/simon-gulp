@@ -1,0 +1,46 @@
+$red : #FF5643;
+$blue : #1E90FF;
+$yellow : #FEEF33;
+$green : #BEDE15;
+
+.game-board {
+  .tile {
+    opacity: 0.5;
+  	height: 290px;
+  	border-radius: 150px 150px 150px 150px;
+  	position: absolute;
+    cursor: pointer;
+    &:hover {
+      border: 2px solid black
+    }
+  }
+
+  .red {
+    background: $red;
+    clip: rect(0px, 300px, 150px, 150px);
+    width: 296px;
+  }
+
+  .blue {
+    background: $blue;
+    clip: rect(0px, 150px, 150px, 0px);
+    width: 300px;
+  }
+
+  .yellow {
+    background: $yellow;
+    clip: rect(150px, 150px, 300px, 0px);
+    width: 300px;
+  }
+
+  .green {
+    background: $green;
+    clip: rect(150px,300px, 300px, 150px);
+    width: 296px;
+  }
+
+}
+
+.lit {
+  opacity: 1 !important;
+}
